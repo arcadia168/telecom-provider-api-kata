@@ -61,4 +61,37 @@ module.exports = function (app) {
             }
         );
     });
+
+    app.post('/api/customer_phone_number/activate_number', (req, res) => {
+        const phoneNumberIdToActivate = req.body;
+        console.info(`The phone number ID to activate is: ${JSON.stringify(phoneNumberIdToActivate)}`);
+
+        // Set the specific phone number to be 'activated'
+        Customer.updateOne(
+            {
+                'phoneNumbers.id' : phoneNumberIdToActivate.id
+            },
+            {
+                "$set" : {
+                    "phoneNumbers.$.activated": true
+                }
+            }
+        ).then(outcome => {
+            if (outcome.ok !== 1) {
+                console.info(`The outcome of Customer.findOneAndUpdate for ${phoneNumberIdToActivate.id} was: ${JSON.stringify(outcome)}`);
+                console.error(
+                    `An error occurred when attempting to upsert phone number with ID: ${JSON.stringify(phoneNumberIdToActivate)}`
+                );
+                res.sendStatus(500);
+            } else {
+                console.info(
+                    `${JSON.stringify(outcome.n)} records upserted`
+                );
+                res.sendStatus(200);
+            }
+        }).catch(error => {
+            console.error(`An error occurred when upserting: ${error.message}`);
+            res.sendStatus(500);
+        });;
+    });
 }

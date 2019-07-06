@@ -23,34 +23,55 @@ const testCustomer1Id = uuidv1();
 const testCustomer2Id = uuidv1();
 const testCustomer3Id = uuidv1();
 
+const testPhoneNumberId1 = uuidv1();
+const testPhoneNumberId2 = uuidv1();
+const testPhoneNumberId3 = uuidv1();
+const testPhoneNumberId4 = uuidv1();
+const testPhoneNumberId5 = uuidv1();
+const testPhoneNumberId6 = uuidv1();
+const testPhoneNumberId7 = uuidv1();
+const testPhoneNumberId8 = uuidv1();
+const testPhoneNumberId9 = uuidv1();
+const testPhoneNumberId10 = uuidv1();
+const testPhoneNumberId11 = uuidv1();
+const testPhoneNumberId12 = uuidv1();
+const testPhoneNumberId13 = uuidv1();
+const testPhoneNumberId14 = uuidv1();
+const testPhoneNumberId15 = uuidv1();
+const testPhoneNumberId16 = uuidv1();
+const testPhoneNumberId17 = uuidv1();
+const testPhoneNumberId18 = uuidv1();
+const testPhoneNumberId19 = uuidv1();
+const testPhoneNumberId20 = uuidv1();
+
 // Populate the test database with some fake customer data
 const testCustomer1PhoneNumbers = [
-    { "phoneNumber": "+44-785-551-7478" },
-    { "phoneNumber": "+44-765-555-8239" },
-    { "phoneNumber": "+44-775-550-7953" },
-    { "phoneNumber": "+44-785-554-2551" },
-    { "phoneNumber": "+44-775-559-5768" },
-    { "phoneNumber": "+44-725-550-2967" },
-    { "phoneNumber": "+44-715-554-0878" }
+    { "id": testPhoneNumberId1, "activated": false, "phoneNumber": "+44-785-551-7478" },
+    { "id": testPhoneNumberId2, "activated": false, "phoneNumber": "+44-765-555-8239" },
+    { "id": testPhoneNumberId3, "activated": true, "phoneNumber": "+44-775-550-7953" },
+    { "id": testPhoneNumberId4, "activated": false, "phoneNumber": "+44-785-554-2551" },
+    { "id": testPhoneNumberId5, "activated": false, "phoneNumber": "+44-775-559-5768" },
+    { "id": testPhoneNumberId6, "activated": false, "phoneNumber": "+44-725-550-2967" },
+    { "id": testPhoneNumberId7, "activated": false, "phoneNumber": "+44-715-554-0878" }
 ];
 
 const testCustomer2PhoneNumbers = [
-    { "phoneNumber": "+44-745-557-4431" },
-    { "phoneNumber": "+44-785-553-8959" },
-    { "phoneNumber": "+44-755-555-4163" },
-    { "phoneNumber": "+44-715-555-9128" },
-    { "phoneNumber": "+44-725-553-8397" },
-    { "phoneNumber": "+44-795-551-2137" },
-    { "phoneNumber": "+44-715-550-5101" },
+    { "id": testPhoneNumberId8, "activated": false, "phoneNumber": "+44-745-557-4431" },
+    { "id": testPhoneNumberId9, "activated": false, "phoneNumber": "+44-785-553-8959" },
+    { "id": testPhoneNumberId10, "activated": false, "phoneNumber": "+44-755-555-4163" },
+    { "id": testPhoneNumberId11, "activated": false, "phoneNumber": "+44-715-555-9128" },
+    { "id": testPhoneNumberId12, "activated": false, "phoneNumber": "+44-725-553-8397" },
+    { "id": testPhoneNumberId13, "activated": true, "phoneNumber": "+44-795-551-2137" },
+    { "id": testPhoneNumberId14, "activated": false, "phoneNumber": "+44-715-550-5101" },
 ];
 
 const testCustomer3PhoneNumbers = [
-    { "phoneNumber": "+44-715-551-6031" },
-    { "phoneNumber": "+44-755-559-7116" },
-    { "phoneNumber": "+44-725-550-2081" },
-    { "phoneNumber": "+44-795-557-4821" },
-    { "phoneNumber": "+44-735-552-3423" },
-    { "phoneNumber": "+44-765-551-6580" },
+    { "id": testPhoneNumberId15, "activated": true, "phoneNumber": "+44-715-551-6031" },
+    { "id": testPhoneNumberId16, "activated": false, "phoneNumber": "+44-755-559-7116" },
+    { "id": testPhoneNumberId17, "activated": false, "phoneNumber": "+44-725-550-2081" },
+    { "id": testPhoneNumberId18, "activated": false, "phoneNumber": "+44-795-557-4821" },
+    { "id": testPhoneNumberId19, "activated": false, "phoneNumber": "+44-735-552-3423" },
+    { "id": testPhoneNumberId20, "activated": false, "phoneNumber": "+44-765-551-6580" },
 ];
 
 describe('Customer Phone Number API', () => {
@@ -135,5 +156,28 @@ describe('Customer Phone Number API', () => {
             .concat(testCustomer3PhoneNumbers);
 
         expect(retrievedPhoneNumbers.body).toEqual(allPhoneNumbers)
+    });
+
+    it('Sets a specific phone number to active', async () => {
+        await request(app)
+            .post('/api/customer_phone_number/activate_number/')
+            .send({
+                id: testPhoneNumberId14
+            });
+
+        // Assert that the item was inserted into the databse
+        const expectedActivatedPhoneNumber = await Customer.find(
+            {
+                'phoneNumbers': {
+                    $elemMatch: {
+                        'id': testPhoneNumberId14
+                    }
+                }
+            }
+        );
+
+        const updatedPhoneNumbers = expectedActivatedPhoneNumber[0].phoneNumbers;
+        const expectedActivatedNumber = updatedPhoneNumbers[updatedPhoneNumbers.length - 1];
+        expect(expectedActivatedNumber.activated).toBe(true)
     });
 });
