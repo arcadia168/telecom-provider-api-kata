@@ -116,13 +116,24 @@ describe('Customer Phone Number API', () => {
         const response = await request(app)
             .get('/')
 
-        expect(response.text).toBe('Hello! This is the customer phone number API running on Node, Express and MongoDB! Make some requests.')
+        expect(response.text)
+            .toBe(
+                'Hello! This is the customer phone number API running on Node, Express and MongoDB! Make some requests.'
+            )
     });
 
     it('Retrieves all of the phone numbers for a specified customer', async () => {
-        const retrievedCustomer1PhoneNumbers = await request(app)
-            .get(`/api/customer_phone_numbers/${testCustomer1Id}`);
-
+        const retrievedCustomer1PhoneNumbers = await request(app).get(`/api/customer_phone_numbers/customer/${testCustomer1Id}`);
         expect(retrievedCustomer1PhoneNumbers.body).toEqual(testCustomer1PhoneNumbers);
+    });
+
+    it('Retrieves all of the phone numbers of all of the customers in the database', async () => {
+        const retrievedPhoneNumbers = await request(app).get(`/api/customer_phone_numbers/all/`);
+
+        const allPhoneNumbers = testCustomer1PhoneNumbers
+            .concat(testCustomer2PhoneNumbers)
+            .concat(testCustomer3PhoneNumbers);
+
+        expect(retrievedPhoneNumbers.body).toEqual(allPhoneNumbers)
     });
 });
