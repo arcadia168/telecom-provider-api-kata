@@ -14,12 +14,19 @@ var routes = require('./src/server/routes');
 var app = express();
 
 // config files
+var sess = {
+    genid: function (req) {
+        return uuidv1() // use UUIDs for session IDs
+    },
+    secret: 'keyboard dog',
+    cookie: {}
+}
 
 // set our port
 var port = process.env.PORT || 8080; // 8080 is detault Google Cloud port
 
 // connect to our mongoDB database
-mongoose.connect(dbconfig.url, {useNewUrlParser: true});
+mongoose.connect(dbconfig.url, { useNewUrlParser: true });
 const database = mongoose.connection
 database.on('error', console.error.bind(console, 'connection error:'));
 database.once('open', () => {
