@@ -1,20 +1,20 @@
 // server.js
 
 // modules =================================================
-var express = require('express');
-var bodyParser = require('body-parser');
-var session = require('express-session')
-var methodOverride = require('method-override');
-var mongoose = require('mongoose');
+const express = require('express');
+const bodyParser = require('body-parser');
+const session = require('express-session')
+const methodOverride = require('method-override');
+const mongoose = require('mongoose');
 const uuidv1 = require('uuid/v1');
-var dbconfig = require('./config/db');
-var routes = require('./src/server/routes');
+const dbconfig = require('./config/db');
+const routes = require('./src/server/routes');
 
 // configuration ===========================================
-var app = express();
+const app = express();
 
 // config files
-var sess = {
+const sess = {
     genid: function (req) {
         return uuidv1() // use UUIDs for session IDs
     },
@@ -23,7 +23,7 @@ var sess = {
 }
 
 // set our port
-var port = process.env.PORT || 8080; // 8080 is detault Google Cloud port
+const port = process.env.PORT || 8080; // 8080 is detault Google Cloud port
 
 // connect to our mongoDB database
 mongoose.connect(dbconfig.url, { useNewUrlParser: true });

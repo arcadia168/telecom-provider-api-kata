@@ -1,4 +1,4 @@
-# Node Express and MongoDB Shopping Cart API
+# Node Express and MongoDB Customer Phone Number API
 
 This is a startup project with a basic Node Express server for a Customer Phone Number API.
 

@@ -1,7 +1,5 @@
-// grab the mongoose module
 const mongoose = require('mongoose');
 
-// define our shopping cart item model
 const PhoneNumberSchema = new mongoose.Schema({
     id: String,
     phoneNumber: String,
