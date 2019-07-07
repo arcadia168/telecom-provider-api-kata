@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "7f9eaebd-8175-4e78-a85f-716c8e788147",
+		"name": "Customer Phone Numbers API Requests",
+		"description": "Collection of requests for testing the Node Express Mongo API coding exercise.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Local -  Get specific customer phone number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/customer_phone_numbers/customer/cd1edb31-a09a-11e9-b4f1-5d0ae5a662e9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"customer_phone_numbers",
+						"customer",
+						"cd1edb31-a09a-11e9-b4f1-5d0ae5a662e9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Live -  Get specific customer phone number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://customer-phone-number-api.appspot.com/api/customer_phone_numbers/customer/cd1edb31-a09a-11e9-b4f1-5d0ae5a662e9",
+					"protocol": "https",
+					"host": [
+						"customer-phone-number-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"customer_phone_numbers",
+						"customer",
+						"cd1edb31-a09a-11e9-b4f1-5d0ae5a662e9"
+					]
+				},
+				"description": "Version of the request running against the deployed app on Google Cloud Platform."
+			},
+			"response": []
+		},
+		{
+			"name": "Local - Get all customer phone numbers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/customer_phone_numbers/all/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"customer_phone_numbers",
+						"all",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Live - Get all customer phone numbers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://customer-phone-number-api.appspot.com/api/customer_phone_numbers/all/",
+					"protocol": "https",
+					"host": [
+						"customer-phone-number-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"customer_phone_numbers",
+						"all",
+						""
+					]
+				},
+				"description": "Version of the request running against the deployed app on Google Cloud Platform."
+			},
+			"response": []
+		},
+		{
+			"name": "Local -  Activate a phone number",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"cd1f024b-a09a-11e9-b4f1-5d0ae5a662e9\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/customer_phone_number/activate_number/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"customer_phone_number",
+						"activate_number",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Live -  Activate a phone number",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"cd1f024b-a09a-11e9-b4f1-5d0ae5a662e9\"\n}"
+				},
+				"url": {
+					"raw": "https://customer-phone-number-api.appspot.com/api/customer_phone_number/activate_number/",
+					"protocol": "https",
+					"host": [
+						"customer-phone-number-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"customer_phone_number",
+						"activate_number",
+						""
+					]
+				},
+				"description": "Version of the request running against the deployed app on Google Cloud Platform."
+			},
+			"response": []
+		}
+	]
+}
